@@ -11,15 +11,8 @@ export default [
     smalladress: "Hauz Khas Village, New Delhi",
     offer: "₹80 OFF",
     no_of_Delivery: 1500,
-    menuItems: {
-      menu: [
-        {
-          id: 12,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXzSMBPdLvdKarO-liPkR_E2LHVSVvTQXSg&usqp=CAU",
-        },
-      ],
-    },
+    latitude: 12.9916,
+    longitude: 77.5712,
   },
 
   {
@@ -35,15 +28,8 @@ export default [
     smalladress: "Rajouri Garden, New Delhi",
     offer: "₹80 OFF",
     no_of_Delivery: 2500,
-    menuItems: {
-      menu: [
-        {
-          id: 12,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXzSMBPdLvdKarO-liPkR_E2LHVSVvTQXSg&usqp=CAU",
-        },
-      ],
-    },
+    latitude: 12.9716,
+    longitude: 77.5946,
   },
 
   {
@@ -59,15 +45,8 @@ export default [
     smalladress: "Delhi University-GTB Nagar, New Delhi",
     offer: "₹60 OFF",
     no_of_Delivery: 1800,
-    menuItems: {
-      menu: [
-        {
-          id: 12,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXzSMBPdLvdKarO-liPkR_E2LHVSVvTQXSg&usqp=CAU",
-        },
-      ],
-    },
+    latitude: 12.9716,
+    longitude: 77.5946,
   },
 
   {
@@ -83,15 +62,8 @@ export default [
     smalladress: "Hauz Khas, New Delhi",
     offer: "₹50 OFF",
     no_of_Delivery: 1700,
-    menuItems: {
-      menu: [
-        {
-          id: 12,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXzSMBPdLvdKarO-liPkR_E2LHVSVvTQXSg&usqp=CAU",
-        },
-      ],
-    },
+    latitude: 12.9716,
+    longitude: 77.5946,
   },
 
   {
@@ -99,21 +71,14 @@ export default [
     featured_image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXumfbiH2jcIY8xq9QW6B1QGoh3OJ596SnpQ&usqp=CAU",
     name: "38 Barracks",
-    cuisines: "North Indian, Italian, Asian, American",
+    cuisines: "North Indian, Italian, Asian",
     average_cost_for_two: 1600,
     aggregate_rating: 4.4,
     adress: "M-38, Outer Circle, Connaught Place, New Delhi",
     smalladress: "Connaught Place, New Delhi",
     offer: "₹70 OFF",
     no_of_Delivery: 1230,
-    menuItems: {
-      menu: [
-        {
-          id: 12,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXzSMBPdLvdKarO-liPkR_E2LHVSVvTQXSg&usqp=CAU",
-        },
-      ],
-    },
+    latitude: 12.9716,
+    longitude: 77.5946,
   },
 ];

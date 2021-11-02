@@ -30,6 +30,12 @@ const cartReducer = (state = defaultState,action) => {
             console.log(newState, "👌");
            
         }
+        case "DELETE_FROM_CART":{
+          newState.selectedItems = {
+            items: [],
+          }
+          return newState;
+        }
         
             
         default:

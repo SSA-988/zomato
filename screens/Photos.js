@@ -182,7 +182,7 @@ const Photos = () => {
               <Image
                 
                 resizeMode="cover"
-                style={{ width: 120, height: 120 }}
+                style={{ width: 108, height: 108 }}
                 source={{ uri: item.image }}
               />
             </View>

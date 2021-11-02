@@ -233,14 +233,12 @@ const HomeScreen = () => {
             <Pressable>
               <View
                 style={{
-                  margin: 8,
                   flexDirection: "row",
                   alignItems: "center",
-                  // marginHorizontal:25,
-                  paddingHorizontal: 12,
+                  paddingHorizontal:11,
                 }}
               >
-                <View style={{ margin: 8 }}>
+                <View style={{ margin: 6 }}>
                   <Image
                     style={styles.MiddleImage}
                     source={{
@@ -253,6 +251,7 @@ const HomeScreen = () => {
                       fontWeight: "600",
                       color: "gray",
                       margin: 10,
+                      textAlign: "center",
                     }}
                   >
                     Thalis
@@ -272,6 +271,7 @@ const HomeScreen = () => {
                       fontWeight: "600",
                       color: "gray",
                       margin: 10,
+                      textAlign: "center",
                     }}
                   >
                     Pizzas
@@ -291,6 +291,7 @@ const HomeScreen = () => {
                       fontWeight: "600",
                       color: "gray",
                       margin: 10,
+                      textAlign: "center",
                     }}
                   >
                     Burger
@@ -310,6 +311,7 @@ const HomeScreen = () => {
                       fontWeight: "600",
                       color: "gray",
                       margin: 10,
+                      textAlign: "center",
                     }}
                   >
                     Dosas
@@ -341,6 +343,7 @@ const HomeScreen = () => {
                       color: "gray",
                       margin: 10,
                       textAlign: "center",
+                      textAlign: "center",
                     }}
                   >
                     Juices
@@ -360,6 +363,7 @@ const HomeScreen = () => {
                       fontWeight: "600",
                       color: "gray",
                       margin: 10,
+                      textAlign: "center",
                       textAlign: "center",
                     }}
                   >
@@ -381,34 +385,19 @@ const HomeScreen = () => {
                       color: "gray",
                       margin: 10,
                       textAlign: "center",
+                      textAlign: "center",
                     }}
                   >
                     Fries
                   </Text>
                 </View>
-
-                <View style={{ margin: 8 }}>
-                  <Image
-                    style={styles.MiddleImage}
-                    source={{
-                      uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRty1EtgKGI8ChGRVIfvewXaIYi7lE1nOdSOA&usqp=CAU",
-                    }}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: "600",
-                      color: "gray",
-                      margin: 10,
-                    }}
-                  >
-                    Coffee
-                  </Text>
-                </View>
               </View>
             </Pressable>
             {/* <Hotels restaurent={restaurent}/> */}
-            <FlatList data={hotelsData}  renderItem={({item}) => <Hotels restaurent={item}/>}/>
+            <FlatList
+              data={hotelsData}
+              renderItem={({ item }) => <Hotels restaurent={item} />}
+            />
           </SafeAreaView>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -452,9 +441,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   MiddleImage:{
-    width:80,
-    height:80,
-    borderRadius:40,
+    width:70,
+    height:70,
+    borderRadius:35,
     resizeMode:"cover",
   }
 });

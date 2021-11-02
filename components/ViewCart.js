@@ -13,10 +13,12 @@ import firebase from "firebase";
 import { useNavigation } from "@react-navigation/native";
 import { Audio } from "expo-av";
 import { ActivityIndicator } from "react-native";
-
-const ViewCart = () => {
+import { useRoute } from "@react-navigation/native";
+const ViewCart = (props) => {
   // const items = useSelector(selectCart);
+ console.log("🎉",props);
   
+
   const [modal, setModal] = useState(false);
   const [sound, setSound] = React.useState();
   const [loading,setLoading] = useState(false);
@@ -61,18 +63,21 @@ const ViewCart = () => {
   const donation = Number(3);
 
   const addToFireStore = () => {
-    // setLoading(true);
+    setLoading(true);
     db.collection("orders").add({
       items: items,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     }).then(()=> {
-      
-       setTimeout(()=>{
          setModal(false);
-        //  setLoading(false);
-         navigation.navigate("OrderData");
+        setLoading(false);
+         navigation.navigate("OrderData",{
+            latitude:props.latitude,
+            longitude:props.longitude,
+         });
+       setTimeout(()=>{
+        
          playSound();
-       },1500)
+       },1000)
     })
    
     
@@ -92,7 +97,6 @@ const ViewCart = () => {
            style={{
              alignItems: "center",
              justifyContent: "center",
-           
            }}
          >
            <AntDesign
@@ -103,7 +107,14 @@ const ViewCart = () => {
            />
          </Pressable>
 
-         <View style={{ backgroundColor: "white", height: 500 }}>
+         <View
+           style={{
+             backgroundColor: "white",
+             height: 500,
+             borderTopRightRadius: 10,
+             borderTopLeftRadius: 10,
+           }}
+         >
            <Text
              style={{
                color: "red",
@@ -145,7 +156,7 @@ const ViewCart = () => {
              <View
                style={{
                  borderBottomColor: "#D0D0D0",
-                 borderBottomWidth: 3,
+                 borderBottomWidth: 1,
                }}
              />
              <View style={{ padding: 10 }}>
@@ -163,7 +174,7 @@ const ViewCart = () => {
              <View
                style={{
                  borderBottomColor: "#D0D0D0",
-                 borderBottomWidth: 3,
+                 borderBottomWidth: 1,
                }}
              />
 
@@ -239,7 +250,7 @@ const ViewCart = () => {
                }}
              />
 
-             <View style={{ backgroundColor: "#F0F0F0" }}>
+             <View style={{ backgroundColor: "#FEF5E7" }}>
                <View
                  style={{
                    flexDirection: "row",
@@ -328,24 +339,28 @@ const ViewCart = () => {
                {total + 3 + 30}
              </Text>
            </View>
-           <View
+           {/* <View
              style={{
                borderBottomColor: "#D0D0D0",
                borderBottomWidth: 3,
              }}
-           />
+           /> */}
            <TouchableOpacity
              style={{
                backgroundColor: "white",
                padding: 10,
                alignItems: "center",
+               //  backgroundColor: "#CB356B",
+               backgroundColor: "#e52d27",
                //  borderTopLeftRadius: 8,
                //  borderTopRightRadius: 8,
              }}
              activeOpacity={0.9}
              onPress={() => addToFireStore()}
            >
-             <Text style={{ color: "red", fontSize: 17,fontWeight: "600" }}>Place Order</Text>
+             <Text style={{ color: "white", fontSize: 17, fontWeight: "700" }}>
+               Place Order
+             </Text>
            </TouchableOpacity>
          </View>
        </View>

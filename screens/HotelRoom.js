@@ -25,13 +25,14 @@ import { connect } from "react-redux";
 
 const HotelRoom = () => {
   const route = useRoute();
-  const menu = hotelsData;
-  const fmenu = hotelsData[0].menuItems.menu[0];
   //  console.log(menu);
   //  console.log(route);
+  // console.log("📌",route.params)
   const navigation = useNavigation();
   const Tab = createMaterialTopTabNavigator();
   const restaurentName = route.params.name;
+  const latitude = route.params.latitude;
+  const longitude = route.params.longitude;
   console.log("name: ", restaurentName);
   const Onpress = () => {
     console.warn("button pressed");
@@ -153,7 +154,8 @@ const HotelRoom = () => {
         <View
           style={{
             padding: 3,
-            marginLeft: 8,
+            marginLeft: 6,
+            marginRight:10,
             flexDirection: "row",
             alignItems: "center",
           }}
@@ -179,7 +181,7 @@ const HotelRoom = () => {
               <Text style={{ marginLeft: 8, fontSize: 14, color: "#707070" }}>
                 Mode
               </Text>
-              <Text style={{ marginLeft: 8 }}>Delivery</Text>
+              <Text style={{ marginLeft: 8,fontSize:13, }}>Delivery</Text>
             </View>
           </View>
 
@@ -187,7 +189,7 @@ const HotelRoom = () => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              paddingHorizontal: 20,
+               paddingHorizontal: 10,
             }}
           >
             <MaterialCommunityIcons
@@ -206,7 +208,7 @@ const HotelRoom = () => {
                   TIME
                 </Text>
               </View>
-              <Text style={{ marginLeft: 6 }}>30 mins or free</Text>
+              <Text style={{ marginLeft: 6,fontSize: 13,}}>30 mins or free</Text>
             </View>
           </View>
 
@@ -232,7 +234,7 @@ const HotelRoom = () => {
                   OFFERS
                 </Text>
               </View>
-              <Text style={{ marginLeft: 6 }}>View all</Text>
+              <Text style={{ marginLeft: 6,fontSize:13, }}>View all</Text>
             </View>
           </View>
         </View>
@@ -280,7 +282,7 @@ const HotelRoom = () => {
         {/* </Pressable> */}
       </ScrollView>
 
-      <ViewCart />
+      <ViewCart latitude={latitude} longitude={longitude} />
     </SafeAreaView>
   );
 };
@@ -301,7 +303,7 @@ const styles = StyleSheet.create({
   name: {
     marginHorizontal: 10,
     paddingBottom: 6,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "700",
   },
   adress: {

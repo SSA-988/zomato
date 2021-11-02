@@ -28,7 +28,6 @@ const Menu = (props) => {
   const menu = props.menu;
   // const restaurentName = route.params.name;
   // console.log("props: ",props);
-  const id = menu.id;
   const bestSeller = true;
   const onPress = () => {
     console.warn("pressed", menu.name);

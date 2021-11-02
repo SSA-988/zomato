@@ -7,21 +7,24 @@ import { useNavigation } from "@react-navigation/native";
 
 const Hotels = (props) => {
     const restaurent = props.restaurent;
-    console.log(props);
+    // console.log("👉❤",props);
     const navigation = useNavigation();
     return (
       <Pressable
-        onPress={() => navigation.navigate("HotelRoom",{
-          id:restaurent.id,
-          name:restaurent.name,
-          adress:restaurent.adress,
-          smalladress:restaurent.smalladress,
-          cuisines:restaurent.cuisines,
-          aggregate_rating:restaurent.aggregate_rating,
-          no_of_Delivery:restaurent.no_of_Delivery,
-          menu:restaurent.menu,
-          
-        })}
+        onPress={() =>
+          navigation.navigate("HotelRoom", {
+            id: restaurent.id,
+            name: restaurent.name,
+            adress: restaurent.adress,
+            smalladress: restaurent.smalladress,
+            cuisines: restaurent.cuisines,
+            aggregate_rating: restaurent.aggregate_rating,
+            no_of_Delivery: restaurent.no_of_Delivery,
+            menu: restaurent.menu,
+            latitude: restaurent.latitude,
+            longitude: restaurent.longitude,
+          })
+        }
         style={styles.container}
       >
         <Image
@@ -101,15 +104,14 @@ const styles = StyleSheet.create({
   text: {
     paddingHorizontal: 10,
     marginTop: 10,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "600",
   },
   cuisinestext: {
     marginTop: 5,
     paddingHorizontal: 10,
-    marginVertical: 10,
-    fontSize: 17,
-    width:300,
+    marginVertical: 5,
+    fontSize: 14,
     color: "#989898",
   },
   rightContainer: {
@@ -118,8 +120,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#3CB371",
     padding: 5,
     borderRadius: 7,
-    marginBottom: 20,
-    marginRight: 10,
+    marginBottom: 8,
+    marginRight:10,
   },
   leftContainer: {},
   offer: {

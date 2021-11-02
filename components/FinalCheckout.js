@@ -15,7 +15,7 @@ const FinalCheckout = ({item}) => {
           backgroundColor: "white",
         }}
       >
-        <Text style={{ fontWeight: "600", color: "red" }}>{name}</Text>
+        <Text style={{ fontWeight: "700", color: "red" }}>{name}</Text>
         <Text style={{ fontWeight: "600", color: "red" }}>{price}</Text>
       </View>
     );
