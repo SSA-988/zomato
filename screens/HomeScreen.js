@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState ,useEffect} from "react";
 import { Image, KeyboardAvoidingView, Pressable, SafeAreaView, StyleSheet, Text, View,FlatList } from 'react-native'
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import {GOOGLE_MAPS_API_KEY} from "@env";
@@ -12,42 +12,101 @@ import { ScrollView } from "react-native-gesture-handler";
 import Hotels from '../components/Hotels';
 import hotels from "../data/hotels";
 import hotelsData from '../data/hotelsData';
-
+import { useNavigation } from "@react-navigation/native";
+import * as Location from "expo-location";
+import Categories from "../components/Categories";
 
  const restaurent = hotelsData[0];
 //  console.log(restaurent);
 
 const HomeScreen = () => {
-  GetLocation.getCurrentPosition({
-    enableHighAccuracy: true,
-    timeout: 15000,
- })
-    .then((location) => {
-      console.log(location);
-    })
-    .catch((error) => {
-      const { code, message } = error;
-      console.warn(code, message);
-   });
-   const leftActions = () => {
-    return (
-      <View>
-        <Text>{"   "}</Text>
-      </View>
-    )
-    };
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [data, setData] = useState([]);
+  const navigation = useNavigation();
 
+    useEffect(() => {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+          return;
+        }
 
-    const rightActions = () => {
-       return (
-         <View>
-           <Text>{"   "}</Text>
-         </View>
-       );
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        console.log(location);
+        const lat = location.coords.latitude;
+        const long = location.coords.longitude;
+        fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&result_type=street_address&key=${GOOGLE_MAPS_API_KEY}`
+        )
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log("😁😁😁😁", responseJson);
+            console.log(
+              "ADDRESS GEOCODE is BACK!! => " + JSON.stringify(responseJson)
+            );
+
+            var street_name = responseJson.results[0].address_components.filter(
+              (x) => x.types.filter((t) => t == "premise").length > 0
+            )[0].long_name;
+            console.log(street_name);
+
+            var homeAdress = responseJson.results[0].address_components.filter(
+              (x) => x.types.filter((t) => t == "political").length > 0
+            )[0].long_name;
+            console.log(homeAdress);
+
+            var locality = responseJson.results[0].address_components.filter(
+              (x) =>
+                x.types.filter((t) => t == "sublocality_level_1").length > 0
+            )[0].long_name;
+            console.log(locality);
+
+            var city = responseJson.results[0].address_components.filter(
+              (x) => x.types.filter((t) => t == "locality").length > 0
+            )[0].long_name;
+            console.log(city);
+
+            const finalAdress =
+              street_name +
+              " " +
+              homeAdress +
+              "," +
+              " " +
+              locality +
+              "," +
+              " " +
+              city;
+            console.log("🎉🎉", finalAdress);
+            setData(finalAdress);
+          });
+      })();
+    }, []);
+    let text = "Waiting..";
+    if (errorMsg) {
+      text = errorMsg;
+    } else if (location) {
+      text = JSON.stringify(location);
     }
+    console.log("❤️❤️❤️", data);
+    console.log(text);
+   const placeholderText = ["one", "two", `${data}`];
+   const [state, setState] = useState("");
+
+   useEffect(() => {
+     placeholderText.map((val, index) =>
+       setTimeout(() => {
+         setState(placeholderText[index]);
+       }, 2000)
+     );
+   }, []);
+
+   console.log("👌👌",state);
     return (
       <KeyboardAvoidingView style={{ flex: 1, marginTop: 25 }}>
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           <SafeAreaView>
             {/* <GooglePlacesAutocomplete
             style={{
@@ -78,6 +137,7 @@ const HomeScreen = () => {
           /> */}
 
             <GooglePlacesAutocomplete
+              textInputProps={{ placeholderTextColor: "#CD5C5C" }}
               styles={{
                 container: {
                   flex: 0,
@@ -86,8 +146,13 @@ const HomeScreen = () => {
                   fontWeight: "bold",
                 },
                 textInput: {
-                  fontSize: 20,
+                  marginTop: 4,
+                  fontSize: 14,
+                  // backgroundColor: "#F8F8FF",
                   backgroundColor: "transparent",
+                },
+                textContainer: {
+                  color: "#CD5C5C",
                 },
                 textStyle: {
                   textDecorationLine: "underline",
@@ -95,8 +160,6 @@ const HomeScreen = () => {
                 textInputContainer: {
                   alignItems: "center",
                   width: "97%",
-
-                  // borderBottomWidth: 2,
                 },
               }}
               minLength={2}
@@ -131,7 +194,7 @@ const HomeScreen = () => {
               }}
               nearbyPlacesAPI="GooglePlacesSearch"
               debounce={200}
-              placeholder="where from"
+              placeholder={data}
               // listViewDisplayed={"auto"}
             />
             <View style={styles.container}>
@@ -146,76 +209,24 @@ const HomeScreen = () => {
                 placeholder="Restaurent name, cuisine, or a dish"
               />
             </View>
-            <Swipeable
-              renderLeftActions={leftActions}
-              renderRightActions={rightActions}
-            >
-              <View style={styles.swipeable}>
-                <Text style={styles.swipeableText}>Max Safety</Text>
-                <Text style={styles.swipeableText}>PRO</Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    borderWidth: 1,
-                    borderColor: "#DCDCDC",
-                    borderRadius: 7,
-                    padding: 5,
-                    backgroundColor: "#F5F5F5",
-                  }}
-                >
-                  <Text>Cuisines</Text>
-                  <MaterialIcons
-                    name="arrow-drop-down"
-                    size={24}
-                    color="black"
-                  />
-                </View>
-                <Text style={styles.swipeableText}>Rating 4.0+</Text>
-                <Text style={styles.swipeableText}>Fastest delivery</Text>
-                <Text style={styles.swipeableText}>Offers</Text>
-                <Text style={styles.swipeableText}>TakeAway</Text>
-              </View>
-            </Swipeable>
-            <Pressable>
+            <Categories/>
+            <Pressable onPress={()=>navigation.navigate("Zomato_Screen")} style={{ marginLeft: 5 }}>
               <View
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  marginLeft: 10,
                 }}
               >
                 <Image
                   style={styles.image}
                   source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd1MWL_qbp_wBYMELGU7T4mWgLOv2yp753JA&usqp=CAU",
+                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBjnMjX8qQb9mLh_IBBHP90SZXccv6uTa662T2Ljfp2xrvNO5IrJmgeWC-RpS_Bxkfzak&usqp=CAU",
                   }}
                 />
                 <Image
                   style={styles.image}
                   source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ4_Kg1xl9wtz0D06fccbS21r3M8QpNb95Vw&usqp=CAU",
-                  }}
-                />
-              </View>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ--kKPFAk0eLXSnXKUMW9uHaQ1Rkg6xo11Ng&usqp=CAU",
-                  }}
-                />
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQnofgcSurlaWEGZoQ5RaHN9GVA4UWygBM2g&usqp=CAU",
+                    uri: "https://cdn.businesstraveller.com/wp-content/uploads/fly-images/1002269/zomato-infinity-dining-916x516-1-916x516.jpg",
                   }}
                 />
               </View>
@@ -235,7 +246,7 @@ const HomeScreen = () => {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  paddingHorizontal:11,
+                  paddingHorizontal: 11,
                 }}
               >
                 <View style={{ margin: 6 }}>
@@ -409,7 +420,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    padding: 10,
+    padding: 5,
     alignItems: "center",
     borderWidth: 2,
     borderRadius: 7,
@@ -435,8 +446,8 @@ const styles = StyleSheet.create({
   image: {
     margin: 10,
     borderRadius: 10,
-    width: 170,
-    height: 110,
+    width: 158,
+    height: 158,
     aspectRatio: 5 / 3,
     resizeMode: "cover",
   },

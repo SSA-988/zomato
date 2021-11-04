@@ -77,7 +77,7 @@ const ViewCart = (props) => {
        setTimeout(()=>{
         
          playSound();
-       },1000)
+       },)
     })
    
     
@@ -180,7 +180,7 @@ const ViewCart = (props) => {
 
              <View style={{ padding: 10 }}>
                <Text
-                 style={{ fontSize: 18, fontWeight: "bold", paddingBottom: 10 }}
+                 style={{ fontSize: 16, fontWeight: "bold", paddingBottom: 10 }}
                >
                  Climate conscious delivery
                </Text>
@@ -205,7 +205,7 @@ const ViewCart = (props) => {
                        style={{
                          color: "black",
                          fontWeight: "600",
-                         fontSize: 15,
+                         fontSize: 14,
                        }}
                      >
                        Thank you for caring about the environment

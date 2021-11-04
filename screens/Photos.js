@@ -166,6 +166,7 @@ const Photos = () => {
         style={{}}
       >
         <FlatList
+        showsVerticalScrollIndicator={false}
           data={data}
           keyExtractor={(item) => item.id}
           numColumns={3}

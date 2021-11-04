@@ -98,7 +98,7 @@ const Menu = (props) => {
               style={{
                 width: 160,
                 marginLeft: 10,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: "bold",
               }}
             >

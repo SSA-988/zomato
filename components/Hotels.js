@@ -4,7 +4,7 @@ import hotels from "../data/hotels";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
+import { SimpleLineIcons } from "@expo/vector-icons";
 const Hotels = (props) => {
     const restaurent = props.restaurent;
     // console.log("👉❤",props);
@@ -51,6 +51,10 @@ const Hotels = (props) => {
           </View>
         </View>
         <Text style={styles.offer}>{restaurent.offer}</Text>
+        <View style={styles.time}>
+          <SimpleLineIcons name="clock" size={15} color="green" />
+          <Text style={{marginLeft:3,fontSize:12}}>{restaurent.time}</Text>
+        </View>
         <View style={styles.lineStyle} />
         <View style={styles.delivery}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -121,20 +125,31 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 7,
     marginBottom: 8,
-    marginRight:10,
+    marginRight: 10,
   },
   leftContainer: {},
   offer: {
     position: "absolute",
-    bottom: 150,
+    bottom: 140,
     fontSize: 18,
     color: "white",
     fontWeight: "bold",
     backgroundColor: "#9370DB",
     paddingHorizontal: 10,
-    padding: 5,
+    padding: 3,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
+  },
+  time: {
+    position: "absolute",
+    flexDirection: "row",
+    alignItems: "center",
+    bottom: 140,
+    backgroundColor: "white",
+    paddingHorizontal: 10,
+    borderRadius:6,
+    padding: 2,
+    right:10,
   },
   lineStyle: {
     borderWidth: 0.5,
@@ -142,11 +157,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 4,
   },
-  delivery:{
+  delivery: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal:10,
-    paddingTop:5,
-    paddingBottom:6,
-  }
+    marginHorizontal: 10,
+    paddingTop: 5,
+    paddingBottom: 6,
+  },
 });

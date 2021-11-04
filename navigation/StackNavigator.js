@@ -10,6 +10,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import Review from "../screens/Review";
 import Photos from "../screens/Photos";
 import OrderData from "../screens/OrderData";
+import Zomato_Screen from "../screens/Zomato_Screen";
 
 
 const StackNavigator = () => {
@@ -44,7 +45,18 @@ const StackNavigator = () => {
           name="OrderData"
           component={OrderData}
           style={{ marginTop: 40 }}
-          options={{ headerTitle: "Your Order", headerTitleAlign: "center",headerTintColor: "white",headerStyle: { backgroundColor:"green"}}}
+          options={{
+            headerTitle: "Your Order",
+            headerTitleAlign: "center",
+            headerTintColor: "white",
+            headerStyle: { backgroundColor: "green" },
+          }}
+        />
+        <Stack.Screen
+          name="Zomato_Screen"
+          component={Zomato_Screen}
+          style={{ marginTop: 40 }}
+          options={{ headerShown: false, headerBackTitle: false }}
         />
       </Stack.Navigator>
     </SafeAreaView>

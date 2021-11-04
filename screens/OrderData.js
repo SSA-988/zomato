@@ -123,7 +123,7 @@ const OrderData = () => {
             apikey={GOOGLE_MAPS_API_KEY}
             strokeWidth={2}
             strokeColor="green"
-            lineDashPattern={[0]}
+            lineDashPattern={[2]}
           />
           <Marker
             coordinate={{
@@ -131,10 +131,10 @@ const OrderData = () => {
               longitude: lon,
             }}
             title="Origin"
-            description="Bangalore"
+            description={restaurentName}
             identifier="origin"
           >
-            <Ionicons name="fast-food-sharp" size={30} color="orange" />
+            <Ionicons name="fast-food-sharp" size={27} color="orange" />
           </Marker>
 
           <Marker
@@ -143,10 +143,10 @@ const OrderData = () => {
               longitude: 77.5358663,
             }}
             title="destination"
-            description="truffles"
+            description="Home"
             identifier="destination"
           >
-            <Entypo name="home" size={30} color="red" />
+            <Entypo name="home" size={28} color="#034694" />
           </Marker>
         </MapView>
         <View
@@ -369,7 +369,7 @@ const OrderData = () => {
               }}
             >
               please pay {"₹"}
-              {tip} to your deilvery agent at the time of delivery
+              {tip} to your delivery agent at the time of delivery
             </Text>
             <TouchableOpacity
               onPress={() => setTip(0)}
@@ -379,8 +379,8 @@ const OrderData = () => {
                 marginLeft: 10,
                 marginRight: 10,
                 position: "absolute",
-                top: 20,
-                left: 80,
+                top: 40,
+
                 paddingBottom: 40,
               }}
             >
